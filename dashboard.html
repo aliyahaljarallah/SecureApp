@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="container">
+    <h2>Welcome, {{ username }}!</h2>
+    <p>Your role: {{ role }}</p>
+    <img src="/static/images/user.png" alt="User" style="width:100px; border-radius: 50%; margin-top: 15px;">
+
+    <!-- Comment form -->
+    <h3>Leave a comment:</h3>
+    <form method="POST">
+      <textarea name="content" rows="4" cols="30" placeholder="Write your comment here..."></textarea><br>
+      <button type="submit">Post Comment</button>
+    </form>
+
+    <!-- Comment list -->
+    <ul>
+        {% for comment in comments %}
+            
+        <li>{{ comment|safe }}</li> 
+            
+
+            <!-- SECURE VERSION -->
+      <!--    {# <li>{{ comment }}</li> #} -->
+        {% endfor %}
+    </ul>
+
+    {% if role == 'admin' %}
+    <a href="{{ url_for('admin') }}">Go to Admin Dashboard</a>
+{% endif %}
+
+    <a href="/logout">Logout</a>
+  </div>
+</body>
+</html>
